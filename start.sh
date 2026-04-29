@@ -4,7 +4,7 @@
 chmod go-w filebeat/zeek.yml
 
 # build
-docker-compose build
+docker compose build
 
 # run
-docker-compose up
+docker compose up
