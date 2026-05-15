@@ -4,7 +4,7 @@ FROM zeek/zeek
 ENV PATH /usr/local/zeek/bin:$PATH
 
 RUN apt-get update \
-    && apt-get -y install --no-install-recommends inotify-tools \
+    && apt-get -y install --no-install-recommends inotify-tools zstd \
     && apt-get clean
 
 # Configure new user
