@@ -33,7 +33,16 @@ USER zeek
 
 # Install zeek packages
 RUN zkg autoconfig  --force
+RUN zkg refresh
 RUN zkg install --force ja3 hassh
+
+# HTTP Expansions
+# the following is a fork of corelight/log-add-http-post-bodies but allows to change the size of the body that is logged (default is 1KB)
+RUN zkg install --force https://github.com/nturley3/zeek-http-post-bodies
+RUN zkg install --force sethhall/zeek-log-all-http-headers
+
+# Modbox Expansions
+RUN zkg install --force icsnpp-modbus
 
 # Add Zeek config
 COPY local.zeek /tmp/local.zeek
