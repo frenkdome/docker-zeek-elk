@@ -58,7 +58,7 @@ function process_pcap() {
         return
     fi
 
-    # ── Move to finished dir (preserves original structure) ───────────────
+    # ── Move to finished dir temporarily for tracking ─────────────────────
     mkdir -p "$FINISHED_DIR"
     mv "$FULLPATH" "$FINISHED_DIR/$FILENAME"
     local MOVED_PATH="$FINISHED_DIR/$FILENAME"
@@ -106,8 +106,10 @@ function process_pcap() {
     ) 9>"$LOGDIR/.lock"
     log "  Logs appended to $LOGDIR"
 
-    # ── Clean up ──────────────────────────────────────────────────────────
+    # ── Clean up: delete PCAP after successful ingestion ──────────────────
     rm -rf "$tmpdir"
+    rm -f "$MOVED_PATH"
+    log "  PCAP deleted: $FILENAME (fully ingested)"
 }
 
 # ── Main watcher loop ─────────────────────────────────────────────────────────
